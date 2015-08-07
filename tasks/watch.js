@@ -2,7 +2,7 @@
 
 /**
  * Watch files, and do things when they changes.
- * Recompile scss if needed.
+ * Recompile less if needed.
  * Reinject files
  */
 
@@ -11,7 +11,7 @@ var livereload = require('gulp-livereload');
 var watch      = require('gulp-watch');
 var inject     = require('gulp-inject');
 var plumber    = require('gulp-plumber');
-var sass       = require('gulp-sass');
+var less       = require('gulp-less');
 var bowerFiles = require('main-bower-files');
 
 var toInject   = require('./config/filesToInject');
@@ -32,36 +32,25 @@ module.exports = function () {
   });
 
   watch([
-    'client/styles/**/*.scss',
-    'client/views/**/*.scss',
-    'client/directives/**/*.scss'
+    'client/**/*.less'
   ], function () {
-    gulp.src('client/styles/app.scss')
+    gulp.src('client/styles/app.less')
       .pipe(plumber())
-      .pipe(sass())
-      .pipe(gulp.dest('client/styles/css'))
+      .pipe(less())
+      .pipe(gulp.dest('client/styles'))
       .pipe(livereload());
   });
 
   var coreFiles = [
-    'client/views',
-    'client/views/**/*.html',
-    'client/views/**/*.js',
-    '!client/views/**/*.scss',
-    '!client/views/**/*.spec.js',
-    '!client/views/**/*.e2e.js',
-    'client/directives',
-    'client/directives/**/*.html',
-    'client/directives/**/*.js',
-    '!client/directives/**/*.spec.js',
-    'client/services',
-    'client/services/**/*.js',
-    '!client/services/**/*.spec.js',
-    'client/animations',
-    'client/animations/*.js',
-    'client/filters',
-    'client/filters/**/*.js',
-    '!client/filters/**/*.spec.js'
+    'client/app',
+    'client/app/**/*.html',
+    'client/app/**/*.js',
+    'client/components',
+    'client/components/**/*.html',
+    'client/components/**/*.js',
+    '!client/**/*.less',
+    '!client/**/*.spec.js',
+    '!client/**/*.e2e.js',
   ];
 
   var lastInjection = Date.now();
@@ -75,6 +64,6 @@ module.exports = function () {
   });
 
   watch(coreFiles, livereload.changed);
-  watch(['client/index.html', 'client/app.js'], livereload.changed);
+  watch(['client/index.html', 'client/app/app.js'], livereload.changed);
 
 };

@@ -26,7 +26,7 @@ var toDelete = [];
 
 module.exports = function (done) {
   runSequence(
-    ['clean:dist', 'sass'],
+    ['clean:dist', 'less'],
     ['usemin', 'copy:dist'],
     ['replace', 'scripts', 'cssmin'],
     'rev',
@@ -68,19 +68,19 @@ gulp.task('cssmin', function () {
 });
 
 gulp.task('scripts', function () {
-  var views = gulp.src('client/views/**/*.html')
+  var views = gulp.src('client/app/**/*.html')
     .pipe(angularTemplatecache({
       root: 'views',
       module: 'ngExample'
     }));
 
-  var tpls = gulp.src('client/directives/**/*.html')
+  var tpls = gulp.src('client/components/**/*.html')
     .pipe(angularTemplatecache({
       root: 'directives',
       module: 'ngExample'
     }));
 
-  var app = gulp.src('dist/client/app.js');
+  var app = gulp.src('dist/client/app/app.js');
 
   return sq({ objectMode: true }, app, views, tpls)
     .pipe(concat('app.js'))
