@@ -5,8 +5,7 @@
 
 module.exports = [
   'client/app/app.js',
-  'client/app/home/home.js',
-  'client/app/home/home.controller.js',
+  'client/app/home/*.js',
   'client/components/**/*.js', 
   '!client/**/*.spec.js',
   '!client/**/*.e2e.js'
