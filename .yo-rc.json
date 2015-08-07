@@ -1,0 +1,12 @@
+{
+  "generator-bangular": {
+    "version": "0.11.2",
+    "filters": {
+      "backend": "json",
+      "reload": "livereload",
+      "karma": true,
+      "e2e": true,
+      "hasTests": true
+    }
+  }
+}
