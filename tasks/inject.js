@@ -11,7 +11,7 @@ var inject     = require('gulp-inject');
 
 var toInject   = require('./config/filesToInject');
 var toExclude  = require('./config/bowerFilesToExclude');
-
+console.log(bowerFiles())
 module.exports = function () {
   return gulp.src('client/index.html')
     .pipe(inject(gulp.src(bowerFiles(), { read: false }), {

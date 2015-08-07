@@ -4,7 +4,6 @@ angular.module('ngExample', [
   'ngRoute'
 ])
   .config(function ($routeProvider, $locationProvider) {
-  	debugger
     $routeProvider
       .otherwise({
         redirectTo: '/'
